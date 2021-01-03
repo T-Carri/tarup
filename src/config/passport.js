@@ -20,8 +20,8 @@ passport.use('local-signup', new LocalStrategy({
   //  userfield: 'user',
   usernameField:'email',
   passwordField:'password',
- passReqToCallback:true //allow us to pass back the entire request  to the callback    
-}, function(req, email, password, done){
+  passReqToCallback:true //allow us to pass back the entire request  to the callback    
+       }, function(req, email, password, done){
     console.log(" email es:" + email, "password es:"+ password);
     User.findOne({'local.email':email}, function(err, user){
         if(err){
@@ -48,8 +48,8 @@ passport.use('local-signup', new LocalStrategy({
 passport.use('local-login', new LocalStrategy({
     usernameField:'email',
     passwordField:'password',
- passReqToCallback:true
-}, function(req, email, password, done){
+    passReqToCallback:true
+                }, function(req, email, password, done){
     console.log("el email es:" + email, "password es:"+ password);
     User.findOne({'local.email':email}, function(err, user){
         if(err){return done(err);

@@ -7,11 +7,11 @@ const flash= require('connect-flash');
 const morgan=require('morgan');
 const cookieParser =require('cookie-parser');
 const  bodyParser=require('body-parser');
-const  session =require('express-session');
+//const  session =require('express-session');
 
 const{url}=require('./config/database');
 mongoose.connect(url,
-     {useMongoClient:true}
+     {useNewUrlParser:true, useUnifiedTopology:true}
      );
 require('./config/passport')(passport);
 //settings
@@ -20,15 +20,16 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','ejs');
 //midleware
 app.use(morgan('dev'));
+app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(session({
     secret:'ok',
     resave:false,
     saveUninitialized:false}));
-    app.use(passport.initialize());
-    app.use(passport.session());
-    app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 //routes
 require('./app/route')(app, passport);
 

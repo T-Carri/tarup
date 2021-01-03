@@ -13,7 +13,7 @@ app.get('/login', (req, res)=>{
 });
 
 app.post('/login', passport.authenticate('local-login',{
-   successRedirect:'/T1',
+   successRedirect:'/T1.ejs',
    failureRedirect:'/login',
    failureFlash: true
 }));
@@ -32,7 +32,7 @@ app.post('/signup', passport.authenticate('local-signup',{
 
 //T1
 app.get('/T1', isLoggedIn, (req, res) => { 
-   res.render('T1', {
+   res.render('T1.ejs', {
       user: req.user
  });
 });
